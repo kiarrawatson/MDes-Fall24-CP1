@@ -1,3 +1,17 @@
+main {
+    text-align: center;
+    padding: 20px;
+}
+
+pre {
+    display: inline-block;
+    text-align: left;
+    font-family: Courier, Consolas, Monospace;
+    white-space: pre;
+    padding: 0;
+    margin: 0;
+}
+
 body {
     margin: 0;
     font-family: Helvetica, Arial, sans-serif;
@@ -5,30 +19,97 @@ body {
     background-color: #C2EABD;
 }
 
-header nav {
-    background-color:#FAF9F6;
+footer {
+    text-align: center;
+    padding: 10px;
 }
 
-header nav ul{
-    list-style: style;
+header {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+header nav {
+    background-color:#FAF9F6;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul {
+    list-style: none;
     padding: 0;
     margin: 0;
     font-size: 24px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
 }
 
 header nav ul li {
     padding: 16px;
     text-align: center;
-    border-bottom: 1px solid #C2EABD;
-}
-
-header ul li: last-child {
     border-bottom: none;
 }
 
 header ul a {
     text-decoration: none;
     color:#011936;
+}
+
+/* TABLET SIZED SCREENS */
+@media (min-width: 768px){
+    header nav ul{
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    header nav {
+        background-color:#FFBF78;
+    }
+
+    header nav ul li {
+        text-align: left;
+        color: #134B70; 
+    }
+
+    header nav ul li a {
+        color: #134B70;
+    }
+
+    body {
+        font-family: Roboto, Montserrat, sans-serif;
+        color: #134B70;
+        background-color: #FF7D29;
+    }
+
+}
+
+/* DESKTOP SIZED SCREENS */
+@media (min-width: 960px){
+    header nav ul{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    header nav {
+        background-color:#FFCDEA;
+    }
+
+    header nav ul li {
+        text-align: center;
+        color: #D895DA; 
+    }
+
+    header nav ul li a {
+        color: #D895DA;
+    }
+
+    body {
+        font-family: Roboto, Montserrat, sans-serif;
+        color: #D895DA;
+        background-color: #C4E4FF;
+    }
 }
