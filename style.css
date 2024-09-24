@@ -5,8 +5,30 @@ body {
     background-color: #C2EABD;
 }
 
+header nav {
+    background-color:#FAF9F6;
+}
+
 header nav ul{
     list-style: style;
     padding: 0;
     margin: 0;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+header nav ul li {
+    padding: 16px;
+    text-align: center;
+    border-bottom: 1px solid #C2EABD;
+}
+
+header ul li: last-child {
+    border-bottom: none;
+}
+
+header ul a {
+    text-decoration: none;
+    color:#011936;
 }
