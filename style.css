@@ -4,3 +4,9 @@ body {
     color: #011936;
     background-color: #C2EABD;
 }
+
+header nav ul{
+    list-style: style;
+    padding: 0;
+    margin: 0;
+}
