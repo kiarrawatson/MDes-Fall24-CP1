@@ -1,37 +1,68 @@
-const originalorder = [
-    'block1' , 'block2' , 'block3' , 'block4' , 
-    'block5' , 'block6' , 'block7' , 'block8' , 'block9'
-];
+let draggedElement = null;
 
-window.onload = function (){
-    let parent = document.getElementById('drag')
-    let frag = document.createDocumentFragment()
-   
-    while (parent.children.length){
-        frag.appendChild(parent.children[Math.floor (Math.random() * parent.children.length)])
+// Shuffle Puzzle Function
+function shufflePuzzle() {
+    let parent = document.getElementById('drag');
+    let frag = document.createDocumentFragment();
+
+    while (parent.children.length) {
+        frag.appendChild(parent.children[Math.floor(Math.random() * parent.children.length)]);
     }
-    
-    parent.appendChild(frag)
 
-    document.getElementById('resetButton').onclick = function() {
-        while (parent.firstChild) {
-            parent.removeChild(parent.firstChild)
-        }
+    parent.appendChild(frag);
+}
 
-        for (let id of originalorder) {
-            const newDiv = document.createElement('div')
-            newDiv.className = 'dragbox'
-            newDiv.innerHTML = `<div class="images" draggable="true" id=${id} style="--img:url('images/${id.split('block')[1]}.png');"></div>`
-            parent.appendChild(newDiv)
-        }
-    };
+// Drag and Drop Events
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('.images');
+    const dragboxes = document.querySelectorAll('.dragbox');
 
-    const images = document.querySelectorAll('.images')
-    const dropbox = document.getElementById('dropbox')
-
+    // Handle the start of the drag
     images.forEach(image => {
-        image.addEventListener('dragstart' , dragStart);
-        
-    }
+        image.addEventListener('dragstart', (event) => {
+            draggedElement = event.target;
+            event.target.style.opacity = 0.5;
+            setTimeout(() => {
+                event.target.style.display = "none";  // Hide dragged element temporarily
+            }, 0);
+        });
 
-};
+        image.addEventListener('dragend', (event) => {
+            event.target.style.opacity = "";
+            event.target.style.display = "";  // Restore visibility of the dragged element
+            draggedElement = null;  // Reset dragged element
+        });
+    });
+
+    // Allow dragboxes to accept dropped items and handle swapping
+    dragboxes.forEach(dragbox => {
+        dragbox.addEventListener('dragover', (event) => {
+            event.preventDefault(); // Necessary to allow a drop
+        });
+
+        dragbox.addEventListener('drop', (event) => {
+            event.preventDefault();
+            
+            const targetBox = event.currentTarget.querySelector('.images');
+            
+            if (draggedElement && targetBox) {
+                // Swap the elements if both dragged element and target exist
+                const draggedParent = draggedElement.parentElement;
+                const targetParent = targetBox.parentElement;
+
+                // Swap the pieces by appending them to each other's parents
+                draggedParent.appendChild(targetBox);
+                targetParent.appendChild(draggedElement);
+            } else if (draggedElement && !targetBox) {
+                // If the target box is empty, simply append the dragged element
+                event.currentTarget.appendChild(draggedElement);
+            }
+        });
+    });
+});
+
+// Shuffle the puzzle when the page loads
+window.onload = shufflePuzzle;
+
+// Add event listener to shuffle the puzzle when the button is clicked
+document.getElementById('shuffleButton').addEventListener('click', shufflePuzzle);

@@ -9,50 +9,47 @@
 </head>
 <body>
     <div class="drag" id="drag">
-        <div class="dragbox">
+        <div class="dragbox" data-original="block1">
             <div class="images" draggable="true" id="block1"
             style="--img:url('images/1.png');"></div>
         </div>
-        <div class="dragbox">
+        <div class="dragbox" data-original="block2">
             <div class="images" draggable="true" id="block2"
             style="--img:url('images/2.png');"></div>
         </div>
-        <div class="dragbox">
+        <div class="dragbox" data-original="block3">
             <div class="images" draggable="true" id="block3"
             style="--img:url('images/3.png');"></div>
         </div>
-        <div class="dragbox">
+        <div class="dragbox" data-original="block4">
             <div class="images" draggable="true" id="block4"
             style="--img:url('images/4.png');"></div>
         </div>
-        <div class="dragbox">
+        <div class="dragbox" data-original="block5">
             <div class="images" draggable="true" id="block5"
             style="--img:url('images/5.png');"></div>
         </div>
-        <div class="dragbox">
+        <div class="dragbox" data-original="block6">
             <div class="images" draggable="true" id="block6"
             style="--img:url('images/6.png');"></div>
         </div>
-        <div class="dragbox">
+        <div class="dragbox" data-original="block7">
             <div class="images" draggable="true" id="block7"
             style="--img:url('images/7.png');"></div>
         </div>
-        <div class="dragbox">
+        <div class="dragbox" data-original="block8">
             <div class="images" draggable="true" id="block8"
             style="--img:url('images/8.png');"></div>
         </div>
-        <div class="dragbox">
+        <div class="dragbox" data-original="block9">
             <div class="images" draggable="true" id="block9"
             style="--img:url('images/9.png');"></div>
         </div>
     </div>
+        
+    <button class="reset" id="shuffleButton">Shuffle Puzzle</button>
 
-    <div class="dropbox" id="dropbox">
-        <h2>Drop Box</h2>
-    </div> 
-        
-    <button class="reset" onClick="window.location.reload()">Reset Puzzle</button>
-        
+    <!-- Link to the external JavaScript file -->
     <script src="script.js"></script>
 </body>
 </html>

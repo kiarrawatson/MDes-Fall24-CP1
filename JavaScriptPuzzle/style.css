@@ -17,13 +17,13 @@ body {
     align-items: center;
     flex-wrap: wrap;
     width: 320px;
-    gap: 10px;
+    gap: 3px;
     cursor: grab;
 }
 .drag .dragbox {
     position: relative;
     width: 100px;
-    height: 100px;
+    height: 132px;
     background: #000;
 }
 .images {
@@ -47,17 +47,4 @@ body {
     font-size: 1em;
     font-weight: 700;
     cursor: pointer;
-}
-.dropbox {
-    width: 320px;
-    height: 150px;
-    border: 2px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px auto;
-    background: #D3D3D3;
-    color: white;
-    font-size: 1.5em;
-    text-align: center;
 }
