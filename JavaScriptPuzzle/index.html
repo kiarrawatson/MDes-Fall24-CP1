@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <h1>Drag and Drop Puzzle Pieces</h1>
+        <h2>To Meet Nanners</h2>
+    </header>
+
     <div class="drag" id="drag">
         <div class="dragbox" data-original="block1">
             <div class="images" draggable="true" id="block1"
@@ -49,7 +54,8 @@
         
     <button class="reset" id="shuffleButton">Shuffle Puzzle</button>
 
-    <!-- Link to the external JavaScript file -->
+    <div id="notification" style="display: none; color: white; margin-top: 20px; font-size: 1.2em;"></div>
+
     <script src="script.js"></script>
 </body>
 </html>

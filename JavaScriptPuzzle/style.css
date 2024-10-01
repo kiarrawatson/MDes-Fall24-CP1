@@ -5,10 +5,23 @@
 }
 body {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
-    background: #5B8C5A; 
+    background: linear-gradient(to bottom, #7FB3C2 30%, #A3D6E1);
+    padding-top: 50px
+}
+header {
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    letter-spacing: 1.5px;
 }
 .drag {
     position: relative;
@@ -21,6 +34,7 @@ body {
     cursor: grab;
 }
 .drag .dragbox {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
     width: 100px;
     height: 132px;
@@ -36,14 +50,15 @@ body {
     background-repeat: no-repeat;
 }
 .reset {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     position: absolute;
-    bottom: 50px;
+    bottom: 350px;
     left: 50%;
     transform: translateX(-50%);
     padding: 15px 25px;
     border: none;
     background: #fff;
-    color: #222;
+    color: #0b5264;
     font-size: 1em;
     font-weight: 700;
     cursor: pointer;
