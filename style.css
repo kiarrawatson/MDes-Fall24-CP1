@@ -19,10 +19,10 @@ pre {
 }
 
 .ascii-art {
-    font-size: 4vw;
+    font-size: 2ch; 
     line-height: 1.1;
-    max-width: 100%;
-    overflow: auto;
+    max-width: 100%; 
+    overflow: auto; 
     text-align: center;
     padding: 10px;
 }
@@ -70,10 +70,17 @@ header ul a {
     color: #CCE490;
 }
 
-/* TABLET SIZED SCREENS */
-@media (min-width: 768px){
+/* MOBILE SIZED SCREENS */
+@media (max-width: 767px) {
+    .ascii-art {
+        font-size: 1.5ch; 
+        padding: 5px; 
+    }
+}
 
-        body {
+/* TABLET SIZED SCREENS */
+@media (min-width: 768px) {
+    body {
         font-family: 'Courier New', 'Courier', 'monospace';
         color: #FF7D29;
         background-color: #FFEEA9;
@@ -86,13 +93,13 @@ header ul a {
     }
 
     header nav {
-        background-color:#FF7D29;
+        background-color: #FF7D29;
     }
 
-    header nav ul{
+    header nav ul {
         flex-direction: row;
         justify-content: right;
-        background-color:#FF7D29;
+        background-color: #FF7D29;
     }
 
     header nav ul li {
@@ -104,9 +111,9 @@ header ul a {
     }
 
     .ascii-art {
-    font-size: 2vw;
-    max-height: 80vh;
-    padding: 20px;
+        font-size: 2.5ch; 
+        max-height: 80vh;
+        padding: 20px;
     }
 
     footer {
@@ -120,8 +127,7 @@ header ul a {
 }
 
 /* DESKTOP SIZED SCREENS */
-@media (min-width: 960px){
-
+@media (min-width: 960px) {
     body {
         font-family: 'Copperplate', 'Papyrus', 'fantasy';
         color: #D20062;
@@ -138,7 +144,7 @@ header ul a {
         background-color: #D20062;
     }
 
-    header nav ul{
+    header nav ul {
         text-align: center;
         flex-direction: row;
         justify-content: space-between;
@@ -156,15 +162,15 @@ header ul a {
     }
 
     .ascii-art {
-        font-size: 2vw;
-        max-height: 70vh;
+        font-size: 3ch; 
+        max-height: 70vh; 
         padding: 18px;
     }
 
     footer {
-    text-align: center;
-    padding: 18px;
-    color: #D895DA;
-    background-color: #D20062; 
+        text-align: center;
+        padding: 18px;
+        color: #D895DA;
+        background-color: #D20062; 
     }
 }
