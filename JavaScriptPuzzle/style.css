@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     display: flex;
     flex-direction: column;
@@ -10,8 +11,10 @@ body {
     align-items: center;
     min-height: 100vh;
     background: linear-gradient(to bottom, #7FB3C2 30%, #A3D6E1);
-    padding-top: 50px
+    padding-top: 50px;
+    padding-bottom: 100px; /* Extra padding at bottom for shuffle button */
 }
+
 header {
     margin-bottom: 50px;
     display: flex;
@@ -23,23 +26,25 @@ header {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
     letter-spacing: 1.5px;
 }
+
+/* Use Grid for a fixed 3x3 layout */
 .drag {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 320px;
-    gap: 3px;
+    display: grid;
+    grid-template-columns: repeat(3, 100px); /* Fixed desktop sizing */
+    grid-gap: 3px;
+    width: 320px; /* Fixed width for desktop */
+    height: 396px; /* Fixed height for desktop */
     cursor: grab;
+    transform-origin: top center; /* Allow scaling from the top center */
 }
+
 .drag .dragbox {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: relative;
-    width: 100px;
-    height: 132px;
     background: #000;
+    width: 100px; /* Fixed width */
+    height: 132px; /* Fixed height */
 }
+
 .images {
     position: relative;
     width: 100%;
@@ -49,12 +54,12 @@ header {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+/* Shuffle button styling */
 .reset {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    position: absolute;
-    bottom: 350px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
+    margin-top: 20px; /* Space between puzzle and button */
     padding: 15px 25px;
     border: none;
     background: #fff;
@@ -62,4 +67,35 @@ header {
     font-size: 1em;
     font-weight: 700;
     cursor: pointer;
+}
+
+/* Media queries for mobile responsiveness */
+@media (max-width: 768px) {
+    .drag {
+        width: 100%; /* Make the puzzle container responsive */
+        transform: scale(0.8); /* Scale down to 80% of its size */
+    }
+    
+    .reset {
+        margin-top: 15px;
+        padding: 12px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 30px;
+        padding-bottom: 120px; /* Extra space for button */
+    }
+
+    .drag {
+        width: 100%; /* Full width on small screens */
+        transform: scale(0.6); /* Scale down to 60% of its size */
+    }
+
+    .reset {
+        margin-top: 10px;
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
 }
