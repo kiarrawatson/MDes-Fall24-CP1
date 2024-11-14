@@ -5,28 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Time & Oscillation Project</title>
   <style>
-
     body, html {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 100vh;
+      justify-content: flex-start;
+      min-height: 100vh;
       margin: 0;
       background-color: #f0f0f0;
+    }
+    header {
+      width: 100%;
+      color: black;
+      text-align: center;
+      margin-top: 20px;
+      padding: 20px 0;
+      font-size: 2em;
+    }
+    h2 {
+      margin-top: 40px;
+      margin-bottom: 20px; 
+      font-size: 2em;
+      color: #333;
+      text-align: center;
+      font-weight: normal;
     }
     #canvas-container {
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-top: 20px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 30px;
+      max-width: 1400px; 
+      margin-top: 40px;
+      text-align: center;
+      margin-bottom: 40px; 
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .gallery-caption {
+      margin-top: 5px;
+      font-size: 1.1em;
+      color: #333;
     }
   </style>
 </head>
 <body>
 
+  <header>Time & Oscillation Project</header>
+
   <div id="canvas-container"></div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <h2>Process</h2>
+  <div class="gallery">
+    <div class="gallery-item">
+      <img src="images/ProjectT_1.png" alt="First Process Image">
+      <div class="gallery-caption">Created foundational setup with canvas, drawing, and color changer functions. Experimented with different color palettes and shapes to get a flower shape.</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/ProjectT_2.png" alt="Second Process Image">
+      <div class="gallery-caption">Added frame variable and sine function to give the flower a cyclical color change. Also added a loop and color array that blends the colors together. Added rotation to the flower petals.</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/ProjectT_3.png" alt="Third Process Image">
+      <div class="gallery-caption">Made a rectangular stem with a declared color value. Added a ellipse center with the same color as the stem.</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/ProjectT_4.png" alt="Fourth Process Image">
+      <div class="gallery-caption">Began implementing cloud shapes. Added cloud draw function and experimented with X & Y placement along with size.</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/ProjectT_5.png" alt="Fifth Process Image">
+      <div class="gallery-caption">Created a draw flower function to add more flowers with placement control for each element. Added a sine wave to the clouds that changes the opacity over time.</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/ProjectT_6.png" alt="Sixth Process Image">
+      <div class="gallery-caption">Finally, slightly adjusted the left and right flowers to be further away from the center flower. </div>
+    </div>
+  </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
   <script>
     let palettes = {
       mix: ['#740938', '#AF1740', '#CC2B52', '#DE7C7D']
@@ -119,6 +184,6 @@
       }
     }
   </script>
+
 </body>
 </html>
-
