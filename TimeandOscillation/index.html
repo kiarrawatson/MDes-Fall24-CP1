@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time & Oscillation Project</title>
+  <style>
+
+    body, html {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    #canvas-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="canvas-container"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+
+  <script>
+    let palettes = {
+      mix: ['#740938', '#AF1740', '#CC2B52', '#DE7C7D']
+    };
+    
+    let angle = 0;
+    
+    let clouds = [
+      {x: 25, y: 80, size: 75},
+      {x: 40, y: 20, size: 100},
+      {x: 50, y: 100, size: 150},
+      {x: 75, y: 150, size: 50},
+      {x: 100, y: 80, size: 180},
+      {x: 150, y: 120, size: 130},
+      {x: 200, y: 75, size: 175},
+      {x: 250, y: 50, size: 120},  
+      {x: 375, y: 100, size: 160},
+      {x: 375, y: 50, size: 100},
+      {x: 475, y: 130, size: 130},  
+      {x: 550, y: 60, size: 130},
+      {x: 575, y: 30, size: 100},
+      {x: 650, y: 20, size: 140},
+      {x: 650, y: 80, size: 140},  
+      {x: 740, y: 11, size: 75},  
+      {x: 725, y: 50, size: 150},    
+      {x: 750, y: 160, size: 150},  
+      {x: 800, y: 150, size: 200}  
+    ];
+    
+    function setup() {
+      let canvas = createCanvas(800, 600);
+      canvas.parent('canvas-container'); 
+      colorMode(RGB, 255);
+    }
+    
+    function draw() {
+      background(220);
+      
+      drawClouds();
+      
+      drawFlower(width/2 - 250, height/2 + 50, 250);
+      drawFlower(width/2, height/2, 350);          
+      drawFlower(width/2 + 250, height/1.5 - 50, 250);
+      
+      angle += 0.02;
+    }
+    
+    function drawFlower(x, y, stemHeight) {
+      push();
+      translate(x, y);
+      noStroke();
+      
+      let stemColor = color(48, 25, 52);
+      fill(stemColor);
+    
+      rect(-5, 30, 10, stemHeight);
+    
+      let colorChange = abs(sin(frameCount * 0.01));
+    
+      for (let i = 0; i < 8; i++) {
+        let startColor = color(palettes.mix[i % palettes.mix.length]);
+        let endColor = color(palettes.mix[(i + 1) % palettes.mix.length]);
+        let blendedColor = lerpColor(startColor, endColor, colorChange);
+        
+        fill(blendedColor);
+        
+        push();
+        rotate(angle + i * (PI / 4));
+        ellipse(0, 50, 30, 100);
+        pop();
+      }
+      
+      fill(stemColor);
+      ellipse(0, 0, 50, 50);
+      
+      pop();
+    }
+    
+    function drawClouds() {
+      noStroke();
+      
+      for (let i = 0; i < clouds.length; i++) {
+        let cloud = clouds[i];
+        
+        let opacity = (sin(frameCount * 0.02 + i) + 1) * 127;
+        
+        fill(255, opacity);
+    
+        ellipse(cloud.x, cloud.y, cloud.size, cloud.size / 2);
+      }
+    }
+  </script>
+</body>
+</html>
+
