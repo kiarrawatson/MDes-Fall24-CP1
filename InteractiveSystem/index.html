@@ -44,18 +44,11 @@
       text-align: center;
       padding: 0 20px;
     }
-    /* Styles for the UML Diagram */
-    #uml-diagram {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 40px;
-    }
-    #uml-diagram img {
-      max-width: 800px;
-      max-height: 600px;
-      width: auto;
-      height: auto;
+    img {
+      display: block;
+      margin: 20px auto;
+      width: 800px;
+      height: 600px;
     }
   </style>
 </head>
@@ -68,9 +61,7 @@
   <p class="description">Directions: Click on the eggs (or not, for a surprise).</p>
 
   <h2>UML Diagram</h2>
-  <div id="uml-diagram">
-    <img src="image/UML_Diagram.png" alt="UML Diagram">
-  </div>
+  <img src="image/UML_Diagram.png" alt="UML Diagram">
 
   <script>
     let eggs = [];
@@ -96,7 +87,7 @@
       for (let i = 0; i < eggs.length; i++) {
         let egg = eggs[i];
         egg.display();
-        chickCount(i, egg); 
+        checkChickTimeout(i, egg); 
       }
     }
 
@@ -112,7 +103,7 @@
 
       display() {
         if (this.isChick) {
-          hatch(this.x, this.y); 
+          drawChick(this.x, this.y); 
         } else if (this.clicked) {
           fill(0, 0, 100);  
           noStroke();
@@ -128,7 +119,7 @@
 
       isClicked(mx, my) {
         let d = dist(mx, my, this.x, this.y);
-        return d < this.size;
+        return d < this.size;  // mouse in radius
       }
 
       isNearChickenBody() {
@@ -181,7 +172,7 @@
       eggs.push(new Egg(eggX, eggY));
     }
 
-    function chickCount(index, egg) {
+    function checkChickTimeout(index, egg) {
       if (!egg.clicked && millis() - egg.timeLaid > 7000) {
         egg.isChick = true;
       }
@@ -222,18 +213,28 @@
       triangle(340, 255, 360, 255, 350, 270);
 
       pop();
+
+      fill(100);
+      triangle(480, 260, 480, 340, 430, 300);
+
+      stroke(45, 100, 100);
+      strokeWeight(4);
+      line(380, 347, 380, 395);
+      line(420, 347, 420, 395);
+      line(365, 395, 380, 395);
+      line(405, 395, 420, 395);
     }
 
-    function hatch(x, y) {
+    function drawChick(x, y) {
       fill(45, 50, 100);  
       noStroke();
       ellipse(x, y, 30, 30);  
       fill(0);
-      ellipse(x - 5, y - 3, 5, 5);  
-      ellipse(x + 5, y - 3, 5, 5);  
+      ellipse(x - 5, y - 3, 5, 5);  // left eye
+      ellipse(x + 5, y - 3, 5, 5);  // right eye
     }
 
-    function fryEgg() {
+    function mousePressed() {
       for (let egg of eggs) {
         if (egg.isClicked(mouseX, mouseY)) {
           egg.clicked = true;
@@ -253,4 +254,3 @@
 
 </body>
 </html>
-
