@@ -44,11 +44,17 @@
       text-align: center;
       padding: 0 20px;
     }
+    .left-align {
+      text-align: left;
+      max-width: 800px;
+      margin: 20px auto;
+      line-height: 1.6;
+    }
     img {
       display: block;
       margin: 20px auto;
-      width: 800px;
-      height: 800px;
+      max-width: 60%;
+      height: auto;
     }
   </style>
 </head>
@@ -59,6 +65,18 @@
   <div id="canvas-container"></div>
 
   <p class="description">Directions: Click on the eggs (or not, for a surprise).</p>
+
+  <p class="description left-align">
+    The intent of this project was to create an interactive system with UI in the form of a simple game. 
+    It features a chicken which has eggs spawning randomly around it, the idea being that it is laying eggs. 
+    If you click on an egg, it will turn into a fried egg and the chicken will appear angry. If you do not click on the egg, it will turn into a baby chick. 
+    When building this system, I began by moving various shapes around on the canvas to create the appearance of a chicken and an egg. 
+    Once I was satisfied, I created classes for each. This allowed me to have more control over the fried egg and the baby chick. 
+    I decided to make the egg class demonstrate object-oriented programming by following logic that is separate from the other variables. 
+    There is a time element as well as UI that allows the user to select the eggs and change the automatic production of baby chicks. 
+    For the remainder of the project, I experimented with different timing and placement. 
+    The user should be able to click on eggs to make it a fried egg, or leave the eggs alone and allow baby chicks to appear.
+  </p>
 
   <h2>UML Diagram</h2>
   <img src="image/UML_Diagram.png" alt="UML Diagram">
