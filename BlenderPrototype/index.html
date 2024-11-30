@@ -33,30 +33,11 @@
     }
     #canvas-container {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin: 0 auto; /* Center the container */
-      max-width: 1400px; /* Match the gallery's max width */
-      padding: 0 20px; /* Add padding for better readability */
-      margin-bottom: 20px; /* Decreased spacing */
-    }
-    #canvas-container p {
-      font-size: 1.2em;
-      color: #555;
-      margin-bottom: 20px;
-      text-align: justify;
-    }
-    #canvas-container ul {
-      list-style-type: disc;
-      padding-left: 40px; /* Align bullets properly */
-      margin-bottom: 20px; /* Reduced spacing below tutorials */
-    }
-    #canvas-container a {
-      color: #007BFF;
-      text-decoration: none;
-    }
-    #canvas-container a:hover {
-      text-decoration: underline;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      margin-bottom: 20px; /* Slight margin to separate from tutorials */
+      max-width: 1400px;
     }
     .gallery {
       display: grid;
@@ -77,6 +58,30 @@
       font-size: 1.1em;
       color: #333;
     }
+    .tutorial-links {
+      margin-bottom: 20px; /* Adjusted margin */
+      text-align: left; /* Left-aligning the tutorial links */
+      max-width: 1400px; /* Ensuring the text is aligned with the images */
+      width: 100%; /* Ensure it spans the full width */
+      padding-left: 20px; /* Add padding to the left */
+    }
+    .tutorial-links ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    .tutorial-links li {
+      margin-bottom: 10px;
+    }
+    .final-render {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .final-render img {
+      width: 100%; /* Ensures consistency with gallery size */
+      height: auto;
+      max-width: 900px; /* Keeps the image size consistent with others */
+    }
   </style>
 </head>
 <body>
@@ -84,17 +89,21 @@
   <header>Blender Prototype Project</header>
 
   <div id="canvas-container">
-    <p>
-      For the final version of my Blender prototype, I utilized the feedback that I received in class to create a more dynamic design. To do so, I created a completely new design that allowed for movement and on-site durability. In terms of inspiration, I considered the Pipboy, Kindle, and Nintendo Switch.
-    </p>
-    <p>
-      I relied on many tutorials throughout this process. I learned a lot during this project and felt like it gave me a better grasp of Blender. Two tools that really helped me move along were using keyboard shortcuts with X/Y/Z, and BlenderKit. There are some elements that I would like to keep working on as I make this into a portfolio piece, but overall, I think it effectively displays my GDACS environmental dashboard.
-    </p>
+      For the final version of my Blender prototype, I utilized the feedback that I received in class to create a more dynamic design. To do so, I created a completely new design that allowed for movement and on-site durability. In terms of inspiration, I considered the "Pipboy", Kindle, and Nintendo Switch. I relied on many tutorials throughout this process (examples linked below). I learned a lot during this project and felt like it gave me a better grasp of Blender. Two tools that really helped me move along were using keyboard shortcuts with X/Y/Z, and BlenderKit. There are some elements that I would like to keep working on as I make this into a portfolio piece, but overall I think that it effectively displays my GDACS environmental dashboard.
+  </div>
+
+  <div class="tutorial-links">
+    <p>Example tutorials:</p>
     <ul>
-      <li><a href="https://www.youtube.com/watch?v=4l86JpmqdbM&t=78s">Tutorial 1</a></li>
-      <li><a href="https://www.youtube.com/watch?v=I5mVaN7ktrE">Tutorial 2</a></li>
-      <li><a href="https://www.youtube.com/watch?v=JvyAUMID0iw">Tutorial 3</a></li>
+      <li><a href="https://www.youtube.com/watch?v=4l86JpmqdbM&t=78s" target="_blank">Tutorial 1</a></li>
+      <li><a href="https://www.youtube.com/watch?v=I5mVaN7ktrE" target="_blank">Tutorial 2</a></li>
+      <li><a href="https://www.youtube.com/watch?v=JvyAUMID0iw" target="_blank">Tutorial 3</a></li>
     </ul>
+  </div>
+
+  <!-- Image 9 placed between tutorials and process header, centered -->
+  <div class="final-render">
+    <img src="images/9.png" alt="First Final Render Image">
   </div>
 
   <h2>Process</h2>
@@ -124,21 +133,21 @@
       <div class="gallery-caption">Added arm color and sleeve. </div>
     </div>
     <div class="gallery-item">
-      <img src="images/7.png" alt="Seventh Process Image">
-      <div class="gallery-caption">Began modeling device connection sleeve.</div>
-    </div>
-    <div class="gallery-item">
-      <img src="images/8.png" alt="Eighth Process Image">
-      <div class="gallery-caption">Final touches - cleaned up small details.</div>
-    </div>
-    <div class="gallery-item">
-      <img src="images/9.png" alt="Ninth Process Image">
-      <div class="gallery-caption">First final render - wideshot.</div>
-    </div>
-    <div class="gallery-item">
-      <img src="images/10.png" alt="Tenth Process Image">
-      <div class="gallery-caption">Second final render - close up.</div>
-    </div>
+        <img src="images/7.png" alt="Sixth Process Image">
+        <div class="gallery-caption">Began modeling device connection sleeve.</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/8.png" alt="Sixth Process Image">
+        <div class="gallery-caption">Final touches - cleaned up small details.</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/9.png" alt="First Final Render Image">
+        <div class="gallery-caption">First final render - wideshot.</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/10.png" alt="Second Final Render Image">
+        <div class="gallery-caption">Second final render - close up.</div>
+      </div>
   </div>
 
 </body>
