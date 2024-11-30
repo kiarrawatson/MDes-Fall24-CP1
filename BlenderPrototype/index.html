@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blender Prototype Project</title>
+  <style>
+    body, html {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    header {
+      width: 100%;
+      color: black;
+      text-align: center;
+      margin-top: 20px;
+      padding: 20px 0;
+      font-size: 2em;
+      margin-bottom: 40px; /* Spacing below header */
+    }
+    h2 {
+      margin-top: 20px; /* Reduced spacing above "Process" */
+      margin-bottom: 40px;
+      font-size: 2em;
+      color: #333;
+      text-align: center;
+      font-weight: normal;
+    }
+    #canvas-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 0 auto; /* Center the container */
+      max-width: 1400px; /* Match the gallery's max width */
+      padding: 0 20px; /* Add padding for better readability */
+      margin-bottom: 20px; /* Decreased spacing */
+    }
+    #canvas-container p {
+      font-size: 1.2em;
+      color: #555;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+    #canvas-container ul {
+      list-style-type: disc;
+      padding-left: 40px; /* Align bullets properly */
+      margin-bottom: 20px; /* Reduced spacing below tutorials */
+    }
+    #canvas-container a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+    #canvas-container a:hover {
+      text-decoration: underline;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 30px;
+      max-width: 1400px; 
+      margin-top: 40px;
+      text-align: center;
+      margin-bottom: 40px; 
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .gallery-caption {
+      margin-top: 5px;
+      font-size: 1.1em;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Blender Prototype Project</header>
+
+  <div id="canvas-container">
+    <p>
+      For the final version of my Blender prototype, I utilized the feedback that I received in class to create a more dynamic design. To do so, I created a completely new design that allowed for movement and on-site durability. In terms of inspiration, I considered the "Pipboy," Kindle, and Nintendo Switch.
+    </p>
+    <p>
+      I relied on many tutorials throughout this process. I learned a lot during this project and felt like it gave me a better grasp of Blender. Two tools that really helped me move along were using keyboard shortcuts with X/Y/Z, and BlenderKit. There are some elements that I would like to keep working on as I make this into a portfolio piece, but overall, I think it effectively displays my GDACS environmental dashboard.
+    </p>
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=4l86JpmqdbM&t=78s">Tutorial 1</a></li>
+      <li><a href="https://www.youtube.com/watch?v=I5mVaN7ktrE">Tutorial 2</a></li>
+      <li><a href="https://www.youtube.com/watch?v=JvyAUMID0iw">Tutorial 3</a></li>
+    </ul>
+  </div>
+
+  <h2>Process</h2>
+  <div class="gallery">
+    <div class="gallery-item">
+      <img src="images/1.png" alt="First Process Image">
+      <div class="gallery-caption">Created revised device foundation.</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/2.png" alt="Second Process Image">
+      <div class="gallery-caption">Rounded corners on sides.</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/3.png" alt="Third Process Image">
+      <div class="gallery-caption">Added interface image and began experimenting with nodes.</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/4.png" alt="Fourth Process Image">
+      <div class="gallery-caption">Modeled rectangular shapes onto side controllers.</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/5.png" alt="Fifth Process Image">
+      <div class="gallery-caption">Reconfigured human model for arm - considered the scale of the device.</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/6.png" alt="Sixth Process Image">
+      <div class="gallery-caption">Added arm color and sleeve. </div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/7.png" alt="Seventh Process Image">
+      <div class="gallery-caption">Began modeling device connection sleeve.</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/8.png" alt="Eighth Process Image">
+      <div class="gallery-caption">Final touches - cleaned up small details.</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/9.png" alt="Ninth Process Image">
+      <div class="gallery-caption">First final render - wideshot.</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/10.png" alt="Tenth Process Image">
+      <div class="gallery-caption">Second final render - close up.</div>
+    </div>
+  </div>
+
+</body>
+</html>
