@@ -2,8 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interface Project</title>
+    <!-- p5.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+    <!-- ml5.js library -->
+    <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
     <style>
       body, html {
         display: flex;
@@ -22,26 +27,291 @@
         padding: 20px 0;
         font-size: 2em;
       }
+      h2 {
+        margin-top: 40px;
+        margin-bottom: 20px; 
+        font-size: 2em;
+        color: #333;
+        text-align: center;
+        font-weight: normal;
+      }
       #canvas-container {
         display: flex;
         justify-content: center;
         align-items: center;
         margin-top: 20px;
-        width: 100%;
-        max-width: 1000px;
-        height: 500px;
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 30px;
+        max-width: 1400px; 
+        margin-top: 40px;
+        text-align: center;
+        margin-bottom: 40px; 
+      }
+      .gallery img {
+        width: 80%;
+        height: auto;
+        border-radius: 8px;
+      }
+      .gallery-caption {
+        margin-top: 5px;
+        font-size: 1.1em;
+        color: #333;
       }
     </style>
   </head>
   <body>
     <header>Interface Project</header>
+    
+    <div id="canvas-container"></div>
 
-    <div id="canvas-container">
-      <iframe 
-        src="https://editor.p5js.org/kiarrawatson/full/FZ5GbvLkq" 
-        width="640" height="480" 
-        style="border: none;">
-      </iframe>
+    <h2>Process</h2>
+    <div class="gallery">
+      <div class="gallery-item">
+        <img src="images/1.png" alt="First Process Image">
+        <div class="gallery-caption">Inspired by the classic fridge magnets that you can move around to spell out words or use words to make sentences.</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/2.png" alt="Second Process Image">
+        <div class="gallery-caption">Ideating - trying to figure out which path to take.</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/3.png" alt="Third Process Image">
+        <div class="gallery-caption">Created the moveable letters with the mouse. Next step is implementing this into the ml5.js handpose example.</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/4.png" alt="Fourth Process Image">
+        <div class="gallery-caption">Made the letters to size and within frame.</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/5.png" alt="Fifth Process Image">
+        <div class="gallery-caption">Reduced the letter margin.</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/6.png" alt="Sixth Process Image">
+        <div class="gallery-caption">Changed the letters to a border instead of random positioning or columns.</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/7.png" alt="Seventh Process Image">
+        <div class="gallery-caption">Made the letters track index finger.</div>
+      </div>
     </div>
+
+    <script>
+      // p5.js and ml5.js code here
+      let letters = [];
+      let dragging = null;
+      let offsetX = 0, offsetY = 0;
+      let handPose;
+      let video;
+      let hands = [];
+      let margin = 25; // letter margin
+      let resetButton = { x: 0, y: 0, width: 150, height: 50 }; // reset button
+      let landingLineY = 150; // letter landing line
+      let landingLineLength = 300; // letter landing line
+
+      function setup() {
+        createCanvas(640, 480).parent('canvas-container');
+        colorMode(HSB);
+
+        // webcam video
+        video = createCapture(VIDEO);
+        video.size(640, 480);
+        video.hide();
+
+        handPose = ml5.handPose(video, modelReady);
+
+        // Set up letters along the border
+        let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let letterSize = 50;
+        let spacing = 30; 
+        let totalPerimeter = 2 * (width + height - 4 * margin);
+        let step = totalPerimeter / alphabet.length;
+
+        for (let i = 0; i < alphabet.length; i++) {
+          let perimeterPos = i * step;
+
+          let x, y;
+
+          if (perimeterPos < width - 2 * margin) {
+            x = margin + perimeterPos;
+            y = margin;
+          } else if (perimeterPos < width + height - 4 * margin) {
+            x = width - margin;
+            y = margin + (perimeterPos - (width - 2 * margin));
+          } else if (perimeterPos < 2 * width + height - 6 * margin) {
+            x = width - margin - (perimeterPos - (width + height - 4 * margin));
+            y = height - margin;
+          } else {
+            x = margin;
+            y = height - margin - (perimeterPos - (2 * width + height - 6 * margin));
+          }
+
+          letters.push({
+            char: alphabet[i],
+            x: x,
+            y: y,
+            size: letterSize,
+          });
+        }
+
+        // reset button position
+        resetButton.x = width / 2 - resetButton.width / 2;
+        resetButton.y = height - resetButton.height - 100;
+      }
+
+      function modelReady() {
+        console.log('Model Loaded!');
+        detectHands();  // Start detecting hands once the model is ready
+      }
+
+      function detectHands() {
+        handPose.detect(video, gotHands);
+        // Keep detecting hands continuously
+        requestAnimationFrame(detectHands);
+      }
+
+      function gotHands(results) {
+        hands = results;
+        
+        // Check if the hand is wide open (i.e., fingers spread apart)
+        if (hands.length > 0) {
+          let hand = hands[0];
+          let thumbTip = hand.keypoints[4]; // Thumb tip
+          let indexTip = hand.keypoints[8]; // Index tip
+
+          let distance = dist(thumbTip.x, thumbTip.y, indexTip.x, indexTip.y);
+
+          // Set a threshold for "open hand"
+          if (distance > 100) { // You can adjust this threshold value
+            dragging = null; // Stop dragging when the hand is open
+          }
+        }
+      }
+
+      function draw() {
+        // Draw the webcam video
+        image(video, 0, 0, width, height);
+
+        // Draw hand tracking keypoints
+        for (let i = 0; i < hands.length; i++) {
+          let hand = hands[i];
+          for (let j = 0; j < hand.keypoints.length; j++) {
+            let keypoint = hand.keypoints[j];
+            fill(255, 0, 0);
+            noStroke();
+            circle(keypoint.x, keypoint.y, 10);
+          }
+        }
+
+        // Index finger movement (for both left and right hands)
+        if (hands.length > 0) {
+          let hand = hands[0];
+
+          let leftIndexTip = hand.keypoints[8];  // Left index finger tip
+          let rightIndexTip = hand.keypoints[12]; // Right index finger tip
+
+          // Ensure both index fingers are detected
+          if (leftIndexTip && rightIndexTip) {
+            let leftX = leftIndexTip.x;
+            let leftY = leftIndexTip.y;
+            let rightX = rightIndexTip.x;
+            let rightY = rightIndexTip.y;
+
+            // Check if either finger is close enough to any letter to start dragging
+            if (dragging) {
+              // Move the letter with the midpoint of both index fingers
+              let centerX = (leftX + rightX) / 2;
+              let centerY = (leftY + rightY) / 2;
+
+              // dragging
+              dragging.x = constrain(centerX - offsetX, dragging.size / 2 + margin, width - dragging.size / 2 - margin);
+              dragging.y = constrain(centerY - offsetY, dragging.size / 2 + margin, height - dragging.size / 2 - margin);
+            } else {
+              // dragging x letters
+              for (let letter of letters) {
+                let d1 = dist(leftX, leftY, letter.x, letter.y);
+                let d2 = dist(rightX, rightY, letter.x, letter.y);
+
+                // finger dragging
+                if (d1 < letter.size / 2 || d2 < letter.size / 2) {
+                  dragging = letter;
+                  offsetX = (leftX + rightX) / 2 - letter.x;
+                  offsetY = (leftY + rightY) / 2 - letter.y;
+                  break;
+                }
+              }
+            }
+          }
+        }
+
+        // Draw letters
+        for (let letter of letters) {
+          fill(0, 100, 100);
+          stroke(0);
+          ellipse(letter.x, letter.y, letter.size, letter.size);
+          textAlign(CENTER, CENTER);
+          fill(255);
+          textSize(30);
+          text(letter.char, letter.x, letter.y);
+        }
+
+        // Draw reset button
+        fill(0, 0, 100);
+        rect(resetButton.x, resetButton.y, resetButton.width, resetButton.height, 10);
+        fill(255, 0, 0);
+        textSize(16);
+        noStroke()
+        textAlign(CENTER, CENTER);
+        text("Reset Letters", resetButton.x + resetButton.width / 2, resetButton.y + resetButton.height / 2);
+      }
+
+      // MousePressed event
+      function mousePressed() {
+        let d = dist(mouseX, mouseY, resetButton.x + resetButton.width / 2, resetButton.y + resetButton.height / 2);
+        if (d < resetButton.width / 2) {
+          resetLetters(); // Reset the letters when clicked
+        }
+      }
+
+      // Reset letters to their starting positions
+      function resetLetters() {
+        letters = [];
+        let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let letterSize = 50;
+        let spacing = 30; 
+        let totalPerimeter = 2 * (width + height - 4 * margin);
+        let step = totalPerimeter / alphabet.length;
+
+        for (let i = 0; i < alphabet.length; i++) {
+          let perimeterPos = i * step;
+
+          let x, y;
+
+          if (perimeterPos < width - 2 * margin) {
+            x = margin + perimeterPos;
+            y = margin;
+          } else if (perimeterPos < width + height - 4 * margin) {
+            x = width - margin;
+            y = margin + (perimeterPos - (width - 2 * margin));
+          } else if (perimeterPos < 2 * width + height - 6 * margin) {
+            x = width - margin - (perimeterPos - (width + height - 4 * margin));
+            y = height - margin;
+          } else {
+            x = margin;
+            y = height - margin - (perimeterPos - (2 * width + height - 6 * margin));
+          }
+
+          letters.push({
+            char: alphabet[i],
+            x: x,
+            y: y,
+            size: letterSize,
+          });
+        }
+      }
+    </script>
   </body>
 </html>
