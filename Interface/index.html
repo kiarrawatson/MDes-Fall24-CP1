@@ -258,13 +258,18 @@
         // Draw letters
         for (let letter of letters) {
           fill(0, 100, 100);
-          stroke(0);
+          noStroke(0);
           ellipse(letter.x, letter.y, letter.size, letter.size);
           textAlign(CENTER, CENTER);
           fill(255);
           textSize(30);
           text(letter.char, letter.x, letter.y);
         }
+
+        // draw landing line
+        stroke(0, 0, 100);
+        strokeWeight(5);
+        line(width / 2 - landingLineLength / 2, landingLineY, width / 2 + landingLineLength / 2, landingLineY);
 
         // Draw reset button
         fill(0, 0, 100);
